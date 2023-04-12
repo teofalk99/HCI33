@@ -1,0 +1,74 @@
+body{
+    background-color: beige;
+}
+
+#question_container{
+    background-color: white;
+    width: 50%;
+    margin:auto;
+    text-align: center;
+}
+
+.titleq{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.leftbox{
+    background-color: maroon;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    color: white;
+}
+
+.rightbox{
+    background-color: maroon;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    color: white;
+
+}
+
+.playervote{
+    height: 75px;
+    width: 300px;
+    position:absolute;
+    bottom: 0;
+
+}
+
+.p1{
+    width: 75px;
+    height: 75px;
+    background-color: forestgreen;
+    position: absolute;
+    left: 50px;
+    display: none;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.p2{
+    width: 75px;
+    height: 75px;
+    background-color: forestgreen;
+    position: absolute;
+    right: 50px;
+    display: none;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
