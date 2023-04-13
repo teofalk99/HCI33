@@ -1,10 +1,13 @@
-var host = "cpsc484-04.yale.internal:8888";
+// var host = "cpsc484-04.yale.internal:8888";
+var host = "127.0.0.1:4444"; // use for debugging
+var countdown = 4;
 
 $(document).ready(function () {
     frames.start();
+    twod.start();
 });
 
-$('#bruh').click(function(){advance('left')})
+$('#advance-button').click(function(){advance()})
 
 var error = 0;
 //dict to keep track of user votes
@@ -25,20 +28,14 @@ let togglevote = function(item, player)
     
     }
 
-let advance = function(choice)
+let advance = function()
 {
-    //need to do this one more time for some reason to make the styling in the right order
-    togglevote(choice,1)
-    togglevote(choice, 2)
 
-    teamname = (choice == 'left') ? 'A' : 'B'
-
+    teamname = (votes['left1'] + votes['left2'] >= votes['right1'] + votes['right2']) ? 'A' : 'B'
+    choice = (teamname == "A") ? "left" : "right";
 
     $('#' + choice + 'box').css({backgroundColor: '#025808'});
-
     $('#info').html('Great! Your team name will be <b>The X + ' + teamname  + 's!</b>');
-
-    var countdown = 4
 
     var cd = setInterval(function(){
 
@@ -58,7 +55,11 @@ let advance = function(choice)
 }
 
 let is_hand_raised = function (person, hand){
-    wristID = (hand == "left") ? 7 : 14
+
+    // NOTE: I swapped these because the right/left are inverted from the camera's POV. This seems to produce the intended behavior
+    // (at least when looking at the live feed), but I may be missing something
+
+    wristID = (hand == "right") ? 7 : 14
     shoulderID = (hand == "left") ? 5 : 12
 
     wrist_y = person.joints[wristID].position.y;
@@ -68,6 +69,7 @@ let is_hand_raised = function (person, hand){
         return true;
     }
     return false;
+
 }
 
 var frames = {
@@ -117,13 +119,10 @@ var frames = {
 
                 //if a decision has been made, advance to next part of app - will need to pass a team name here
                 //in the final product
-                if (votes['left1'] && votes['left2'])
+                // also should make sure they match for an extended period of time
+                if ( (votes['left1'] == 1 && votes['left2'] == 1) || (votes['right1'] == 1 && votes['right2'] == 1))
                 {
-                    advance('left');
-                }
-                else if (votes['right1'] && votes['right2'])
-                {
-                    advance('right');
+                    advance();
                 }
 
             }
@@ -134,3 +133,25 @@ var frames = {
     }
 
 }
+
+var twod = {
+    socket: null,
+
+    // create a connection to the camera feed
+    start: function () {
+        var url = "ws://" + host + "/twod";
+        twod.socket = new WebSocket(url);
+
+        // whenever a new frame is received...
+        twod.socket.onmessage = function (event) {
+
+            // parse and show the raw data
+            twod.show(JSON.parse(event.data));
+        }
+    },
+
+    // show the image by adjusting the source attribute of the HTML img object previously created
+    show: function (twod) {
+        $('img.twod').attr("src", 'data:image/pnjpegg;base64,' + twod.src);
+    },
+};
