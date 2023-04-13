@@ -5,41 +5,65 @@
     <title>HCI Group 33</title>
   </head>
   <body>
-    <div id="errorline" style="color: red; display: none;">Please make sure two players are in the camera's field!</div>
+
     <div class="container" id="question_container">
+
         <div class="row">
+
           <div class="col-sm" style="margin: 40px">
-            <div id="info">
+            <div id="info" style= "font-size: 32px;">
                 ICEBREAKER: Do you prefer A or B?
-                <p>You will need to agree on one option to advance!</p>
             </div>
             <div id="countdown"></div>
-
-
           </div>
-          <button id="bruh">bruh</button>
+
         </div>
-        <div class="row">
+
+
+        <div class="row" style = "margin: 0 auto">
+
             <div class="col-sm">
-                <div id="leftbox" class="leftbox">raise your left hand for option A
+
+                <div id="leftbox" class="answerbox">raise your left hand for option A
                     <div class="playervote">
                         <div id="leftp1" class="p1">P1</div>
                         <div id="leftp2" class="p2">P2</div>
                     </div>
                 </div>
               </div>
+
               <div class="col-sm">
-                <div id='leftbox' class="rightbox">raise your right hand for option B
+                <div id='leftbox' class="answerbox">raise your right hand for option B
                     <div class="playervote">
                         <div id="rightp1" class="p1">P1</div>
                         <div id="rightp2" class="p2">P2</div>
                     </div>
                 </div>
+              </div>
+
             </div>
 
+        </div>
+
+        <div class = "row" id = "debug-row">
+            <button id="advance-button" style = "margin: 0 auto;"> Force advance </button>
+        </div>  
+
+        <div class = "row" id = "error-row">
+          <span id="errorline" style = "color: red; display: none; margin: 0 auto; font-weight: bold;">
+            Please make sure two players are in the camera's field!
+          </span>
+        </div>
+
+
+        <div class = "row" id = "instruction-row">
+          <span style = "margin: 0 auto;">
             to exit, raise both hands
+          </span>
+        </div>
 
-
+        <div class = "row" id = "kinect-feed-row" >
+          <img class="twod"  style = "width: 320; height: 180px; margin: 0 auto"/>
         </div>
 
       </div>
