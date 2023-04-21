@@ -2,10 +2,43 @@
 var host = "127.0.0.1:4444"; // use for debugging
 var countdown = 4;
 
+const categories = ['fruitveg', 'animals', 'food']
+const options = 
+{
+    'fruitveg': ["Apples", "Artichokes", "Asparagus", "Avocados", "Bananas", "Beets", "Blackberries", "Blueberries", "Broccoli", "Brussels sprouts", "Cantaloupes", "Carrots", "Cauliflowers", "Cherries", "Coconuts", "Corn", "Cranberries", "Cucumbers", "Dates", "Eggplants", "Figs", "Grapes", "Grapefruits", "Guavas", "Honeydews", "Kiwis", "Leeks", "Lemons", "Limes", "Mangos", "Mulberries", "Mushrooms", "Nectarines", "Okras", "Olives", "Onions", "Oranges", "Papayas", "Peaches", "Pears", "Peppers", "Pineapples", "Plums", "Pomegranates", "Potatoes", "Pumpkins", "Quinces", "Raspberries", "Rhubarbs", "Spinach", "Squash", "Strawberries", "Sweet potatoes", "Tangerines", "Tomatoes", "Turnips", "Watermelons", "Yams", "Zucchinis", "Amaranths", "Artichoke hearts", "Brinjals", "Capers", "Chayotes", "Chickpeas", "Chokos", "Endives", "Fennels", "Garlics", "Gingers", "Kales", "Kohlrabis", "Lentils", "Mung beans", "Parsnips", "Snow peas"],
+    'animals': ["Antelopes", "Bears", "Beavers", "Bison", "Camels", "Cats", "Cheetahs", "Chickens", "Cows", "Coyotes", "Crocodiles", "Deer", "Dogs", "Dolphins", "Donkeys", "Dragons", "Ducks", "Eagles", "Elephants", "Elk", "Falcons", "Ferrets", "Fish", "Flamingos", "Foxes", "Geese", "Giraffes", "Goats", "Gorillas", "Hamsters", "Hawks", "Hedgehogs", "Hippopotamuses", "Horses", "Hyenas", "Jaguars", "Kangaroos", "Koalas", "Lemurs", "Leopards", "Lions", "Llamas", "Lynxes", "Mice", "Moose", "Narwhals", "Octopuses", "Owls", "Pandas", "Panthers", "Parrots", "Penguins", "Pigs", "Polar bears", "Porcupines", "Rabbits", "Raccoons", "Rats", "Reindeer", "Rhinos", "Seals", "Sharks", "Sheep", "Snakes", "Squirrels", "Tigers", "Turtles", "Walruses", "Wolves", "Zebras"],
+    'food': [ "Bagels", "Bacon", "Bulgogi", "Biscuits", "Brisket", "Brownies", "Burgers", "Burritos", "Cake", "Candy", "Cheese", "Chicken", "Chips", "Churros", "Clams", "Cookies", "Corn", "Crab", "Croissants", "Curry", "Donuts", "Eggs", "Enchiladas", "Falafel", "Fries", "Gumbo", "Hotdogs", "Icecream", "Jambalaya", "Kebab", "Lasagna", "Lobster", "Macaroni", "Meatballs", "Mushrooms", "Nachos", "Noodles", "Omelettes", "Paella", "Pancakes", "Pasta", "Pizza", "Popcorn", "Pretzels", "Quesadillas", "Salad", "Salmon", "Sandwiches", "Sausages", "Shrimp", "Sushi", "Tacos", "Tofu", "Waffles", "Wings", "Yogurt"],
+    'adjectives': ["Abundant", "Adaptable", "Adorable", "Adventurous", "Affable", "Affectionate", "Agile", "Agreeable", "Alert", "Ambitious", "Amiable", "Amusing", "Appealing", "Appreciative", "Artistic", "Assertive", "Astute", "Attractive", "Authentic", "Awesome", "Balanced", "Beautiful", "Blissful", "Bountiful", "Brave", "Bright", "Brilliant", "Bubbly", "Buoyant", "Calm", "Capable", "Captivating", "Carefree", "Caring", "Celestial", "Charismatic", "Charming", "Cheerful", "Cherished", "Chirpy", "Classy", "Clean", "Clear", "Clever", "Colorful", "Comfortable", "Comical", "Compassionate", "Confident", "Congenial", "Connected", "Considerate", "Content", "Convivial", "Cool", "Cooperative", "Courageous", "Creative", "Credible", "Cuddly", "Curious", "Daring", "Dazzling", "Delightful", "Dependable", "Desirable", "Determined", "Devoted", "Dignified", "Diligent", "Dynamic", "Eager", "Earnest", "Easygoing", "Eccentric", "Efficient", "Elegant", "Eloquent", "Energetic", "Enlightened", "Enthusiastic", "Exciting", "Exotic", "Exquisite", "Exuberant", "Fabulous", "Fantastic", "Fascinating", "Fearless", "Feminine", "Fertile", "Flourishing", "Focused", "Fond", "Friendly", "Fun", "Funny", "Gallant", "Generous", "Genuine", "Glorious", "Glowing", "Graceful", "Gracious", "Grateful", "Great", "Happy", "Harmonious", "Healthy", "Hearty", "Heavenly", "Helpful", "Heroic", "High-spirited", "Honest", "Honorable", "Hopeful", "Humorous", "Idealistic", "Imaginative", "Impressive", "Incredible", "Innovative", "Inquisitive", "Inspiring", "Intelligent", "Intense", "Interesting", "Inventive", "Invigorating", "Jolly", "Joyful", "Joyous", "Jubilant", "Just", "Kind", "Lively", "Lovely", "Loving", "Lucky", "Luxuriant", "Magical", "Magnificent", "Marvelous", "Mellow", "Merry", "Mesmerizing", "Miraculous", "Motivated", "Nimble", "Noble", "Nurturing", "Optimistic", "Passionate", "Peaceful", "Perceptive", "Persevering", "Persuasive", "Playful", "Pleasant", "Pleasing", "Plucky", "Polite", "Positive", "Powerful", "Practical", "Precious", "Precise", "Productive", "Prosperous", "Proud", "Pure", "Radiant", "Rational", "Reasonable", "Reassuring"]
+}
+
+var optionA;
+var optionB;
+
 $(document).ready(function () {
     frames.start();
     twod.start();
+
+    var category = categories[Math.floor(Math.random() * 3)]
+    var opt = options[category]
+
+    optionA = opt[Math.floor(Math.random() * opt.length)]
+    optionB = optionA
+
+    //just to avoid the case where option A and B are the same
+    while (optionA === optionB)
+    {
+        optionB = opt[Math.floor(Math.random() * opt.length)]
+    }
+
+    $('#info').html('ICEBREAKER: Do you prefer ' + optionA + ' or ' + optionB + '?')
+    $('#leftopt').html('raise your left hand for ' + optionA)
+    $('#rightopt').html('raise your right hand for ' + optionB)
+
+
+
 });
+
+
 
 $('#advance-button').click(function(){advance()})
 
@@ -31,12 +64,19 @@ let togglevote = function(item, player)
 let advance = function()
 {
 
-    teamname = (votes['left1'] + votes['left2'] >= votes['right1'] + votes['right2']) ? 'A' : 'B'
-    choice = (teamname == "A") ? "left" : "right";
+    // set teamname and decide which box to change color
+    teamname = (votes['left1'] + votes['left2'] >= votes['right1'] + votes['right2']) ? optionA : optionB
+    choice = (teamname == optionB) ? "left" : "right";
 
+
+    // add random adjective to beginning of choice
+    teamname = options['adjectives'][Math.floor(Math.random() * options['adjectives'].length)] + teamname
+
+    //update interface
     $('#' + choice + 'box').css({backgroundColor: '#025808'});
-    $('#info').html('Great! Your team name will be <b>The X + ' + teamname  + 's!</b>');
+    $('#info').html('Great! Your team name will be <b>' + teamname  + '!</b>');
 
+    //start countdown then redirect to game
     var cd = setInterval(function(){
 
         console.log(countdown)
@@ -44,7 +84,8 @@ let advance = function()
         {
             clearInterval(cd);
             //placeholder for brickbreaker game
-            window.location.href = './placeholdergame.html';
+            localStorage.teamName = teamname
+            window.location.href = './game.html';
         }
         
         $('#countdown').html('GAME STARTS IN ' + countdown)
