@@ -1,68 +1,82 @@
 body{
-    background-color: beige;
-}
-
-#question_container{
     background-color: white;
-    width: 50%;
-    margin:auto;
-    text-align: center;
-}
-
-.titleq{
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-}
-
-.row{
-    margin: 30px 0px 0px 30px; 
-}
-
-.answerbox{
-    background-color: maroon;
-    width: 300px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-    color: white;
-    margin: 0 auto;
-}
-
-
-.playervote{
-    height: 75px;
-    width: 300px;
-    position:absolute;
-    bottom: 0;
-
 }
 
 .p1{
-    width: 75px;
-    height: 75px;
-    background-color: forestgreen;
-    position: absolute;
-    left: 50px;
-    display: none;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
+    background-color: rgb(0, 159, 183);
 }
 
 .p2{
-    width: 75px;
-    height: 75px;
-    background-color: forestgreen;
-    position: absolute;
-    right: 50px;
-    display: none;
+    background-color: rgb(254, 74, 73);
+}
+
+
+.row{
+    margin: 32px 0px 0px 32px; 
+}
+
+.text {
+    font-size: 24px;
+    width: 100%;
+    font-family: 'Lato';
+    justify-content: center;
+    align-content: center;
+}
+
+.option-text{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+#exit-text{
+    font-size: 12px;
+}
+
+#main-container{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#header-primary-text{
+    font-size: 48px;
+}
+
+.answer-box{
+    background-color: rgb(230, 230, 234);
+    border-radius: 8px;
+    width: 480px;
+    height: 360px;
+    display: flex;
     justify-content: center;
     align-content: center;
     flex-direction: column;
+    margin: 0 auto;
+}
+
+.vote-container{
+    margin: 24px 0px 0px 0px;
+    height: 0px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.vote-marker{
+
+    opacity: 0.0;
+    font-size: 42px;
+    flex-wrap: wrap;
+    height: 84px;
+    width: 84px;
+    border-radius: 42px;
+    display: flex;
+
+}
+
+
+.twod{
+    width: 192px; 
+    height: 108px; 
+    border-radius: 8px;
+    margin: 0 auto;
 }
