@@ -11,8 +11,6 @@ const OPTIONS = {
 
 let optionA;
 let optionB;
-let seconds_remaining = COUNTDOWN_DURATION;
-let error = 0;
 let votes = {  //dict to keep track of user votes
     'p1_left': 0, 
     'p1_right': 0, 
@@ -69,9 +67,11 @@ let advance = function(){
 
     //update interface
     $('#' + choice + '-answer-box').css("backgroundColor", "rgb(254, 215, 102)");
-    $('#header-primary-text').html('Great! Your team name will be <b>' + teamname  + '!</b>');
+    $('#header-primary-text').html('Great! Your team name is <b>' + teamname  + '!</b>');
 
     //start countdown then redirect to game
+    let seconds_remaining = COUNTDOWN_DURATION;
+
     var cd = setInterval(function(){
 
         if (seconds_remaining == 0){
@@ -81,10 +81,12 @@ let advance = function(){
             window.location.href = './game.html';
         }
         
-        $('#header-secondary-text').html('GAME STARTS IN ' + seconds_remaining + "...");
+        $('#countdown-secondary-text').html("Starting game...");
+        $('#countdown-primary-text').html(seconds_remaining);
         seconds_remaining -= 1
 
     }, 1000)
+
 }
 
 
@@ -120,22 +122,34 @@ let frames = {
         // console.log(frame)
 
         //check for correct number of players
-        if (frame.people.length != 2)
-        {
+        if (frame.people.length != 2){
             $('#header-secondary-text').html('<span style = "color: red; font-weight: bold;"> Please make sure two players are in the camera\'s field! </span>');
-            //*TODO*
         }
-        else
-        {
+        else{
+
+            $('#header-secondary-text').html('Icebreaker:');
 
             //make sure leftmost player is always player 1
             let players = (frame.people[0].x_pos <= frame.people[1].x_pos) ? [frame.people[0], frame.people[1]] : [frame.people[1], frame.people[0]]
 
-
             players.forEach((player, i) => {
                 if ( is_hand_raised(player, 'left') && is_hand_raised(player, 'right') ){
-                    console.log('QUIT')
-                    alert('QUIT/RESTART FUNCTIONALITY HERE');
+
+                    let seconds_remaining = COUNTDOWN_DURATION;
+
+                    var cd = setInterval(function(){
+
+                        if (seconds_remaining == 0){
+                            clearInterval(cd);
+                            window.location.href = './intro.html';
+                        }
+                        
+                        $('#countdown-primary-text').html("Aborting game...");
+                        $('#countdown-secondary-text').html(seconds_remaining);
+                        seconds_remaining -= 1
+                
+                    }, 1000)
+
                 }
                 else if (is_hand_raised(player, 'left')){
                     update_votes(i+1, 'left');
@@ -149,14 +163,6 @@ let frames = {
             //in the final product
             // also should make sure they match for an extended period of time
             if ( (votes['p1_left'] == 1 && votes['p2_left'] == 1) || (votes['p1_right'] == 1 && votes['p2_right'] == 1)){
-
-                setInterval(function(){
-                    if (votes['p1_left'] != votes['p2_left']){
-                        return;
-                    }
-                }, 1000)
-
-
                 advance();
             }
 

@@ -15,7 +15,7 @@ $(document).ready(function () {
         }
     }
 
-    stored_items.sort(elt => elt[1]);
+    stored_items.sort((a, b) => b[1] - a[1]);
 
     for (let i = 0; i < Math.min(NUM_LEADERBOARD_ELEMENTS, stored_items.length); i++){
         $( "#leaderboard-table" ).append( "<tr id = 'leaderboard-item'><td>" + (i+1) 
