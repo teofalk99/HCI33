@@ -12,7 +12,7 @@ body{
 
 
 .row{
-    margin: 32px 0px 0px 32px; 
+    margin: 32px 0px 32px 0px; 
 }
 
 .text {
@@ -80,3 +80,26 @@ body{
     border-radius: 8px;
     margin: 0 auto;
 }
+
+#leaderboard-title-text{
+    font-size: 64px;
+    margin: 32px 0px 32px 0px;
+}
+
+
+#leaderboard-table{
+    border-collapse: separate;
+    table-layout: fixed;
+    width: 100%;
+}
+
+#leaderboard-item {
+    font-size: 20px;
+    background-color: rgb(241, 241, 243);
+}
+
+#leaderboard-header-item {
+    font-size: 24px;
+    background-color: rgb(230, 230, 234);
+}
+

@@ -77,6 +77,7 @@ let advance = function(){
         if (seconds_remaining == 0){
             clearInterval(cd);
             localStorage.teamName = teamname //placeholder for brickbreaker game
+            localStorage.setItem(teamname, 0);
             window.location.href = './game.html';
         }
         
