@@ -50,7 +50,7 @@ TV_ASSET_URL = '/project/HCI33'
 
 function preload ()
 {
-    this.load.setBaseURL(LAPTOP_ASSET_URL)
+    this.load.setBaseURL(TV_ASSET_URL)
     // These assets are from the Phaser3 library
     this.load.image('paddle1', 'assets/paddle1.png');
     this.load.image('ball1', 'assets/ball1.png');
