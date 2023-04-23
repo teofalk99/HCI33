@@ -43,9 +43,14 @@ var frames = {
     }
 };
 
+// Switch between laptop asset url and tv asset url depending on which screen you are testing
+// Assets will only load with a local live server/python http server for laptop
+LAPTOP_ASSET_URL = 'http://127.0.0.1:5500/' 
+TV_ASSET_URL = '/project/HCI33'
+
 function preload ()
 {
-    this.load.setBaseURL('/project/HCI33')
+    this.load.setBaseURL(LAPTOP_ASSET_URL)
     // These assets are from the Phaser3 library
     this.load.image('paddle1', 'assets/paddle1.png');
     this.load.image('ball1', 'assets/ball1.png');
