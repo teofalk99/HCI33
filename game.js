@@ -45,13 +45,14 @@ var frames = {
 
 function preload ()
 {
-    this.load.setBaseURL('http://labs.phaser.io');
-    this.load.image('paddle1', '/assets/games/breakout/paddle1.png');
-    this.load.image('ball1', '/assets/games/breakout/ball1.png');
-    this.load.image('paddle2', '/assets/games/breakout/paddle2.png');
-    this.load.image('ball2', '/assets/games/breakout/ball2.png');
-    this.load.image('brick', '/assets/games/breakout/green1.png');
-    this.load.image('background', '/assets/skies/pixelback1.jpg');
+    this.load.setBaseURL('/project/HCI33')
+    // These assets are from the Phaser3 library
+    this.load.image('paddle1', 'assets/paddle1.png');
+    this.load.image('ball1', 'assets/ball1.png');
+    this.load.image('paddle2', 'assets/paddle2.png');
+    this.load.image('ball2', 'assets/ball2.png');
+    this.load.image('brick', 'assets/green1.png');
+    this.load.image('background', 'assets/pixelback1.jpg');
 }
 
 // Game Objects
