@@ -68,23 +68,20 @@ let advance = function(){
     teamname = "The " + OPTIONS['adjectives'][Math.floor(Math.random() * OPTIONS['adjectives'].length)] + " " + teamname;
 
     //update interface
-    console.log('#' + choice + '-answer-box');
     $('#' + choice + '-answer-box').css("backgroundColor", "rgb(254, 215, 102)");
     $('#header-primary-text').html('Great! Your team name will be <b>' + teamname  + '!</b>');
 
     //start countdown then redirect to game
     var cd = setInterval(function(){
 
-        console.log(seconds_remaining)
         if (seconds_remaining == 0){
             clearInterval(cd);
             localStorage.teamName = teamname //placeholder for brickbreaker game
             window.location.href = './game.html';
         }
         
-        $('#header-secondary-text').html('GAME STARTS IN ' + seconds_remaining);
+        $('#header-secondary-text').html('GAME STARTS IN ' + seconds_remaining + "...");
         seconds_remaining -= 1
-
 
     }, 1000)
 }
@@ -129,7 +126,6 @@ let frames = {
         }
         else
         {
-            $('#header-secondary-text').html("Icebreaker:");
 
             //make sure leftmost player is always player 1
             let players = (frame.people[0].x_pos <= frame.people[1].x_pos) ? [frame.people[0], frame.people[1]] : [frame.people[1], frame.people[0]]
@@ -145,14 +141,21 @@ let frames = {
                 }
                 else if (is_hand_raised(player, 'right')){
                     update_votes(i+1, 'right');
-
                 }
             });
 
             //if a decision has been made, advance to next part of app - will need to pass a team name here
             //in the final product
             // also should make sure they match for an extended period of time
-            if ( (votes['left1'] == 1 && votes['left2'] == 1) || (votes['right1'] == 1 && votes['right2'] == 1)){
+            if ( (votes['p1_left'] == 1 && votes['p2_left'] == 1) || (votes['p1_right'] == 1 && votes['p2_right'] == 1)){
+
+                setInterval(function(){
+                    if (votes['p1_left'] != votes['p2_left']){
+                        return;
+                    }
+                }, 1000)
+
+
                 advance();
             }
 
