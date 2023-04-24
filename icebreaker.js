@@ -56,7 +56,18 @@ $(document).ready(function () {
 });
 
 
-$('#advance-button').click(() => do_countdown("./instructions.html", "Loading instructions..."));
+$('#advance-button').click(function(){
+
+    let choice = "left";
+    let teamname = "The " + OPTIONS['adjectives'][Math.floor(Math.random() * OPTIONS['adjectives'].length)] + " " + optionA;
+    localStorage.setItem("currteamname", teamname);
+
+    $('#' + choice + '-answer-box').css("backgroundColor", "rgb(254, 215, 102)");
+    $('#header-primary-text').html('Great! Your team name is <b>' + teamname  + '!</b>');
+
+    do_countdown("./instructions.html", "Loading instructions...")
+
+} );
 
 let do_countdown = function(destination_html, secondary_text){
 
