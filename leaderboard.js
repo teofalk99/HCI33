@@ -6,14 +6,14 @@ const IGNORED_STORED_KEY = "teamName";
 $(document).ready(function () {
 
     twod.start(); // comment out to hide live feed
-
+    console.log(localStorage.getItem("teamdata"));// debug
+    console.log(localStorage.getItem("currteamname"))
+    console.log(localStorage.getItem("currgamescore"))
+    teamdata = JSON.parse(localStorage.getItem("teamdata"));
     let stored_items = [];
-    for (let i = 0; i < localStorage.length; i++){
-        let key = localStorage.key(i)
-        if (key != IGNORED_STORED_KEY){
-            stored_items.push([key, localStorage.getItem(key)]);
-        }
-    }
+    Object.keys(teamdata).forEach(function(key){
+        stored_items.push([key, teamdata[key]]);
+    })
 
     stored_items.sort((a, b) => b[1] - a[1]);
 

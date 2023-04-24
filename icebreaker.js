@@ -83,7 +83,8 @@ let advance = function(){
         if (seconds_remaining == 0){
             clearInterval(countdown_interval);
             localStorage.setItem("currteamname", teamname);
-            window.location.href = './instructions.html';
+            // window.location.href = './instructions.html';
+            window.location.href = './game.html'; //remove later
         }
         
         $('#countdown-secondary-text').html("Loading instructions...");

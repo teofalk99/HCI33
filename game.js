@@ -84,9 +84,13 @@ function finishGame(){
     }
     // Add Current Game Score
     localStorage.setItem("currgamescore", game_score);
-    // Add Team Name and Score
-    teamdata = localStorage.getItem("teamdata");
+    // Get Team Data JSON
+    teamdata = JSON.parse(localStorage.getItem("teamdata"));
+    // Add new team-score pair
     teamdata[localStorage.currteamname] = game_score;
+    // Restore as string
+    localStorage.setItem("teamdata", JSON.stringify(teamdata));
+    // Redirect
     window.location.href = './leaderboard.html';
 }
 
