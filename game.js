@@ -45,7 +45,7 @@ var frames = {
 
 // Switch between laptop asset url and tv asset url depending on which screen you are testing
 // Assets will only load with a local live server/python http server for laptop
-LAPTOP_ASSET_URL = 'http://127.0.0.1:5500/' 
+LAPTOP_ASSET_URL = 'http://127.0.0.1:4444/' 
 TV_ASSET_URL = '/project/HCI33'
 
 function preload ()
