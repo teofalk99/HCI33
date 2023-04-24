@@ -115,3 +115,21 @@ body{
     background-color: rgb(230, 230, 234);
 }
 
+.instruction{
+    height: 280px;
+    background-color: white;
+}
+
+#advance-instructions {
+    display: flex;
+    font-size: 42px;
+    border-radius: 8px;
+    height: 80px;
+    width: 100%;
+    background-color: rgb(230, 230, 234);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+}

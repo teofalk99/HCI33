@@ -83,11 +83,10 @@ let advance = function(){
         if (seconds_remaining == 0){
             clearInterval(countdown_interval);
             localStorage.teamName = teamname //placeholder for brickbreaker game
-            localStorage.setItem(teamname, 0);
-            window.location.href = './game.html';
+            window.location.href = './instructions.html';
         }
         
-        $('#countdown-secondary-text').html("Starting game...");
+        $('#countdown-secondary-text').html("Loading instructions...");
         $('#countdown-primary-text').html(seconds_remaining);
         seconds_remaining -= 1
 
