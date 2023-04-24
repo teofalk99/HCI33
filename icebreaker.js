@@ -99,8 +99,8 @@ let advance = function(){
 
 let is_hand_raised = function(person, hand) {
 
-    wristID = (hand == "right") ? 7 : 14;
-    shoulderID = (hand == "right") ? 12 : 5;
+    wristID = (hand == "right") ? 14 : 7;
+    shoulderID = (hand == "right") ? 5 : 12;
 
     wrist_y = person.joints[wristID].position.y;
     shoulder_y = person.joints[shoulderID].position.y;
