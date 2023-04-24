@@ -1,5 +1,5 @@
-//const HOST = "cpsc484-04.yale.internal:8888"; // live input
-const HOST = "127.0.0.1:4444"; // use for debugging
+const HOST = "cpsc484-04.yale.internal:8888"; // live input
+//const HOST = "127.0.0.1:4444"; // use for debugging
 const COUNTDOWN_DURATION = 4;
 const CATEGORIES = ['fruitveg', 'animals', 'food']
 const OPTIONS = {
@@ -11,6 +11,10 @@ const OPTIONS = {
 
 let optionA;
 let optionB;
+let countdown_interval;
+let countdown_reason;
+let in_countdown = 0;
+
 let votes = {  //dict to keep track of user votes
     'p1_left': 0, 
     'p1_right': 0, 
@@ -71,11 +75,13 @@ let advance = function(){
 
     //start countdown then redirect to game
     let seconds_remaining = COUNTDOWN_DURATION;
+    countdown_reason = "advance";
+    in_countdown = 1;
 
-    var cd = setInterval(function(){
+    countdown_interval = setInterval(function(){
 
         if (seconds_remaining == 0){
-            clearInterval(cd);
+            clearInterval(countdown_interval);
             localStorage.teamName = teamname //placeholder for brickbreaker game
             localStorage.setItem(teamname, 0);
             window.location.href = './game.html';
@@ -125,6 +131,17 @@ let frames = {
         if (frame.people.length != 2){
             $('#header-secondary-text').html('<span style = "color: red; font-weight: bold;"> Please make sure two players are in the camera\'s field! </span>');
         }
+        else if (in_countdown){
+
+            // cancelling logic
+            if (countdown_reason == "advance" && votes['p1_left'] != votes['p2_left']){
+                clearInterval(countdown_interval);
+                in_countdown = 0;
+                $('#countdown-secondary-text').html("");
+                $('#countdown-primary-text').html("");
+            }
+
+        }
         else{
 
             $('#header-secondary-text').html('Icebreaker:');
@@ -136,16 +153,18 @@ let frames = {
                 if ( is_hand_raised(player, 'left') && is_hand_raised(player, 'right') ){
 
                     let seconds_remaining = COUNTDOWN_DURATION;
+                    countdown_reason = "abort";
+                    in_countdown = 1;
 
-                    var cd = setInterval(function(){
+                    countdown_interval = setInterval(function(){
 
                         if (seconds_remaining == 0){
-                            clearInterval(cd);
+                            clearInterval(countdown_interval);
                             window.location.href = './intro.html';
                         }
                         
-                        $('#countdown-primary-text').html("Aborting game...");
-                        $('#countdown-secondary-text').html(seconds_remaining);
+                        $('#countdown-secondary-text').html("Aborting game...");
+                        $('#countdown-primary-text').html(seconds_remaining);
                         seconds_remaining -= 1
                 
                     }, 1000)
