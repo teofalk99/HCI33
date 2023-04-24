@@ -50,7 +50,7 @@ TV_ASSET_URL = '/project/HCI33'
 
 function preload ()
 {
-    this.load.setBaseURL(LAPTOP_ASSET_URL)
+    this.load.setBaseURL(TV_ASSET_URL)
     // These assets are from the Phaser3 library
     this.load.image('paddle1', 'assets/paddle1.png');
     this.load.image('ball1', 'assets/ball1.png');
@@ -67,7 +67,9 @@ var ball1;
 var ball2;
 
 // Important Coords
-var paddle_Y_fixed = screen.height/1.95;
+
+// var paddle_Y_fixed = screen.height/1.95; // For running on laptop
+var paddle_Y_fixed = screen.height/2.5; // For running on TV display
 var origin = [DEFAULT_WIDTH/2, 0];
 
 // Win/Loss Condition Info
@@ -151,11 +153,8 @@ function create ()
             if (down){
                 body.destroy();
                 live_ball_count -= 1;
-                // First Ball Lost
-                if (live_ball_count === 1){
-                    $('#game_status').html("<b>Lost 1st life, 1 ball remaining!</b>");
-                // Second Ball Lost
-                } else if (live_ball_count === 0){
+                // Both Balls Lost
+                if (live_ball_count === 0){
                     // game.destroy(true, true); //Uncomment this when you want game over to close game screen
                     $('#game_status').html("<b>Lost 2nd life, 0 balls remaining!<br>Game Over!</b>");
                 }
@@ -166,7 +165,6 @@ function create ()
     // Initial Ball Velocity at the very end
     ball1.setVelocity(-125, -150)  
     ball2.setVelocity(125, -150) 
-
     frames.start()
 }
 
