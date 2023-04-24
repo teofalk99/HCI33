@@ -11,10 +11,6 @@ const OPTIONS = {
 
 let optionA;
 let optionB;
-let countdown_interval;
-let countdown_reason;
-let in_countdown = 0;
-
 let votes = {  //dict to keep track of user votes
     'p1_left': 0, 
     'p1_right': 0, 
@@ -36,8 +32,11 @@ let update_votes = function(player, raised_hand){
 
 $(document).ready(function () {
 
+
     frames.start();
     twod.start(); // comment out to hide live feed
+
+    in_countdown = 0;
 
     var category = CATEGORIES[Math.floor(Math.random() * 3)]
     var opt = OPTIONS[category]
@@ -57,36 +56,21 @@ $(document).ready(function () {
 });
 
 
-$('#advance-button').click(() => advance());
+$('#advance-button').click(() => do_countdown("./instructions.html", "Loading instructions..."));
 
-let advance = function(){
+let do_countdown = function(destination_html, secondary_text){
 
-    // set teamname and decide which box to change color
-    teamname = (votes['p1_left'] + votes['p2_left'] >= votes['p1_right'] + votes['p2_right']) ? optionA : optionB;
-    choice = (teamname == optionB) ? "right" : "left";
-
-
-    // add random adjective to beginning of choice
-    teamname = "The " + OPTIONS['adjectives'][Math.floor(Math.random() * OPTIONS['adjectives'].length)] + " " + teamname;
-
-    //update interface
-    $('#' + choice + '-answer-box').css("backgroundColor", "rgb(254, 215, 102)");
-    $('#header-primary-text').html('Great! Your team name is <b>' + teamname  + '!</b>');
-
-    //start countdown then redirect to game
-    let seconds_remaining = COUNTDOWN_DURATION;
-    countdown_reason = "advance";
     in_countdown = 1;
+    let seconds_remaining = COUNTDOWN_DURATION;
 
-    countdown_interval = setInterval(function(){
+    let countdown_interval = setInterval(function(){
 
         if (seconds_remaining == 0){
             clearInterval(countdown_interval);
-            localStorage.teamName = teamname //placeholder for brickbreaker game
-            window.location.href = './instructions.html';
+            window.location.href = destination_html;
         }
         
-        $('#countdown-secondary-text').html("Loading instructions...");
+        $('#countdown-secondary-text').html(secondary_text);
         $('#countdown-primary-text').html(seconds_remaining);
         seconds_remaining -= 1
 
@@ -129,46 +113,18 @@ let frames = {
             $('#header-secondary-text').html('<span style = "color: red; font-weight: bold;"> Please make sure two players are in the camera\'s field! </span>');
         }
         else if (in_countdown){
-
-            // TODO:cancelling logic
-            // if (countdown_reason == "advance" && 
-            //     (is_hand_raised(frame.people[0], 'left') != is_hand_raised(frame.people[1], 'left'))){
-            //     clearInterval(countdown_interval);
-            //     in_countdown = 0;
-            //     $('#countdown-secondary-text').html("");
-            //     $('#countdown-primary-text').html("");
-            //     $('#header-primary-text').html('Do you prefer <b>' + optionA.toLowerCase() + '</b> or <b>' + optionB.toLowerCase() + '</b>?');
-            //     $('#header-secondary-text').html("Icebreaker:");
-            // }
-
+            // cancelling logic could go here
         }
         else{
 
-            $('#header-secondary-text').html('Icebreaker:');
+            $('#header-secondary-text').html('Icebreaker (You must agree!)');
 
             //make sure leftmost player is always player 1
             let players = (frame.people[0].x_pos <= frame.people[1].x_pos) ? [frame.people[0], frame.people[1]] : [frame.people[1], frame.people[0]]
 
             players.forEach((player, i) => {
                 if ( is_hand_raised(player, 'left') && is_hand_raised(player, 'right') ){
-
-                    let seconds_remaining = COUNTDOWN_DURATION;
-                    countdown_reason = "abort";
-                    in_countdown = 1;
-
-                    countdown_interval = setInterval(function(){
-
-                        if (seconds_remaining == 0){
-                            clearInterval(countdown_interval);
-                            window.location.href = './intro.html';
-                        }
-                        
-                        $('#countdown-secondary-text').html("Aborting game...");
-                        $('#countdown-primary-text').html(seconds_remaining);
-                        seconds_remaining -= 1
-                
-                    }, 1000)
-
+                    do_countdown("./intro.html", "Aborting game...");
                 }
                 else if (is_hand_raised(player, 'left')){
                     update_votes(i+1, 'left');
@@ -182,7 +138,23 @@ let frames = {
             //in the final product
             // also should make sure they match for an extended period of time
             if ( (votes['p1_left'] == 1 && votes['p2_left'] == 1) || (votes['p1_right'] == 1 && votes['p2_right'] == 1)){
-                advance();
+
+                teamname = (votes['p1_left'] + votes['p2_left'] >= votes['p1_right'] + votes['p2_right']) ? optionA : optionB;
+                choice = (teamname == optionB) ? "right" : "left";
+            
+                // add random adjective to beginning of choice
+                teamname = "The " + OPTIONS['adjectives'][Math.floor(Math.random() * OPTIONS['adjectives'].length)] + " " + teamname;
+            
+                // store teamname in local storage
+                localStorage.setItem("currteamname", teamname);
+
+                // update interface
+                $('#' + choice + '-answer-box').css("backgroundColor", "rgb(254, 215, 102)");
+                $('#header-primary-text').html('Great! Your team name is <b>' + teamname  + '!</b>');
+
+                
+                do_countdown("./instructions.html", "Loading instructions...");
+
             }
 
         }
