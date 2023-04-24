@@ -75,6 +75,20 @@ var origin = [DEFAULT_WIDTH/2, 0];
 // Win/Loss Condition Info
 var live_ball_count = 2;
 var bricks_left_count = 10;
+var game_score = 0;
+
+function finishGame(){
+    // Create teamdata array in local storage if it does not exist
+    if(localStorage.getItem("teamdata") === null){
+        localStorage.setItem("teamdata", JSON.stringify({}));
+    }
+    // Add Current Game Score
+    localStorage.setItem("currgamescore", game_score);
+    // Add Team Name and Score
+    teamdata = localStorage.getItem("teamdata");
+    teamdata[localStorage.currteamname] = game_score;
+    window.location.href = './leaderboard.html';
+}
 
 function create ()
 {
@@ -138,12 +152,14 @@ function create ()
         {
             brick.destroy()
             bricks_left_count -= 1;
+            game_score += 1;
             // Game Won (0 Bricks Left)
             if (bricks_left_count === 0){
                 ball1.body.destroy();
                 ball2.body.destroy();
-                $('#game_status').html("<b>Congratulations! Your team destroyed all the bricks and won!</b>");
-                // game.destroy(true, true); //Uncomment this when you want game won to close game screen
+
+                game.destroy(true, true);
+                finishGame(); //Game finishing logic
             }
         }
     );
@@ -155,8 +171,8 @@ function create ()
                 live_ball_count -= 1;
                 // Both Balls Lost
                 if (live_ball_count === 0){
-                    // game.destroy(true, true); //Uncomment this when you want game over to close game screen
-                    $('#game_status').html("<b>Lost 2nd life, 0 balls remaining!<br>Game Over!</b>");
+                    game.destroy(true, true); //Uncomment this when you want game over to close game screen
+                    finishGame(); //Game finishing logic
                 }
             }
         }
