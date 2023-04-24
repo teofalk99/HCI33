@@ -125,21 +125,22 @@ let frames = {
 
     show: function (frame) {
 
-        // console.log(frame)
-
         //check for correct number of players
         if (frame.people.length != 2){
             $('#header-secondary-text').html('<span style = "color: red; font-weight: bold;"> Please make sure two players are in the camera\'s field! </span>');
         }
         else if (in_countdown){
 
-            // cancelling logic
-            if (countdown_reason == "advance" && votes['p1_left'] != votes['p2_left']){
-                clearInterval(countdown_interval);
-                in_countdown = 0;
-                $('#countdown-secondary-text').html("");
-                $('#countdown-primary-text').html("");
-            }
+            // TODO:cancelling logic
+            // if (countdown_reason == "advance" && 
+            //     (is_hand_raised(frame.people[0], 'left') != is_hand_raised(frame.people[1], 'left'))){
+            //     clearInterval(countdown_interval);
+            //     in_countdown = 0;
+            //     $('#countdown-secondary-text').html("");
+            //     $('#countdown-primary-text').html("");
+            //     $('#header-primary-text').html('Do you prefer <b>' + optionA.toLowerCase() + '</b> or <b>' + optionB.toLowerCase() + '</b>?');
+            //     $('#header-secondary-text').html("Icebreaker:");
+            // }
 
         }
         else{
