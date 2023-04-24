@@ -16,9 +16,6 @@ $(document).ready(function () {
     twod.start(); // comment out to hide live feed
     frames.start();
 
-    console.log(localStorage.getItem("teamdata"));// debug
-    console.log(localStorage.getItem("currteamname"))
-    console.log(localStorage.getItem("currgamescore"))
     teamdata = JSON.parse(localStorage.getItem("teamdata"));
     let stored_items = [];
     Object.keys(teamdata).forEach(function(key){
@@ -37,6 +34,8 @@ $(document).ready(function () {
         $( "#leaderboard-table" ).append("<tr id = 'leaderboard-item'><td>-</td><td>-</td><td>-</td></tr>");
     }
 
+    // Display Current Team Name and Score
+    $('#header-team-text').html("Your Team Name: " + "<b>" + localStorage.getItem("currteamname") +"</b>"+ "<br>" + "Your Game Score: " + "<b>" + localStorage.getItem("currgamescore") + "</b>");
 });
 
 
@@ -105,8 +104,6 @@ let frames = {
 
         }
         else {
-
-            $('#header-secondary-text').html("Great teamwork! Here's something to work towards.");
 
             //make sure leftmost player is always player 1
             let players = (frame.people[0].x_pos <= frame.people[1].x_pos) ? [frame.people[0], frame.people[1]] : [frame.people[1], frame.people[0]]
