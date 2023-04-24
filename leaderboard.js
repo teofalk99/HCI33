@@ -1,7 +1,7 @@
 const HOST = "cpsc484-04.yale.internal:8888"; // live input
 //const HOST = "127.0.0.1:4444"; // use for debugging
 const NUM_LEADERBOARD_ELEMENTS = 10;
-const IGNORED_STORED_KEY = "teamName";
+const COUNTDOWN_DURATION = 4;
 
 let in_countdown = 0;
 let votes = {  //dict to keep track of user votes
