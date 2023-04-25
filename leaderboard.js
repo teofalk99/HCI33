@@ -36,6 +36,10 @@ $(document).ready(function () {
 
     // Display Current Team Name and Score
     $('#header-team-text').html("Your Team Name: " + "<b>" + localStorage.getItem("currteamname") +"</b>"+ "<br>" + "Your Game Score: " + "<b>" + localStorage.getItem("currgamescore") + "</b>");
+
+    setTimeout(function(){
+        window.location.href = './index.html';
+    }, 20000);
 });
 
 
