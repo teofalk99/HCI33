@@ -1,7 +1,7 @@
 # HCI33
 
 ## Dependencies
-There are no dependencies required for this project to run.
+There are no dependencies required for this project to run. All files are HTML/CSS/JS.
 
 ## How to Run
 To run the project (on a laptop or on the TV Display), you must run a live web server to allow for the local brick breaker assets to be loaded.
@@ -10,6 +10,7 @@ To do so, type one of these command in terminal (depends on OS and python instal
 python -m http.server -b 127.0.0.1 5500
 OR 
 python3 -m http.server -b 127.0.0.1 5500
+The initial page should be 'index.html'
 
 ## Project Description
 Our project is a two-part icebreaker-teamwork challenge which has an icebreaker portion and a co-op gameplay portion. The first part consists of finding a person nearby to be a teammate. This will be followed up by an icebreaker portion where the two players will introduce themselves to each other. The two players will be prompted with a question in the form of: "Do you prefer X or Y?" where X and Y are two randomly chosen things like "apples" or "pears". The two players will then vote by raising left or right hand. If they disagree, they must discuss with one another until they come to a compromise to advance forward with the game. Once both players vote for the same option, it will go for the instruction page for 2-player cooperative brick breaker. Once the players understand the instructions, they will go ahead and play the game. Once the game finishes, they will go to the leaderboard page where they will have the option to either play again or exit.
