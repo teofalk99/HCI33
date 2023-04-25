@@ -7,9 +7,13 @@ There are no dependencies required for this project to run. All files are HTML/C
 To run the project (on a laptop or on the TV Display), you must run a live web server to allow for the local brick breaker assets to be loaded.
 
 To do so, type one of these command in terminal (depends on OS and python installation, and the port doesn't matter):
+
 python -m http.server -b 127.0.0.1 5500
+
 OR 
+
 python3 -m http.server -b 127.0.0.1 5500
+
 The initial page should be 'index.html'
 
 ## Project Description
