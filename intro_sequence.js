@@ -29,12 +29,21 @@ function startIcebreakerIntro() {
     state = "icebreakerIntro";
 }
 function icebreakerIntro() {
-    document.getElementById("instruction").innerHTML = "Now let's break the ice."
+    document.getElementById("instruction").innerHTML = "Now let's break the ice.";
+    document.getElementById("instruction").style.fontSize = "100px";
+
     document.getElementById("gif").style.display = "none";
     document.getElementById("myBar").style.display = "none";
     document.getElementById("instruction2").style.display = "none";
-    document.getElementById("exitInstruction").style.display = "none";
-    //document.getElementById("btn").style.display = "none";
+
+    document.getElementById("btn").style.display = "none";
+    document.getElementById("kinect-feed-row").style.display = "none";
+
+    // Switch to icebreaker page after 3 seconds
+    setTimeout(function(){
+        window.location.href = './icebreaker.html';
+    }, 3000)
+
     state = "beginIcebreaker";
 }
 
@@ -71,7 +80,6 @@ let frames = {
             }else if (state == "icebreakerIntro"){
                 icebreakerIntro();
             }else if (state == "beginIcebreaker"){
-                window.location.href = "./icebreaker.html"
             }
             
         }
