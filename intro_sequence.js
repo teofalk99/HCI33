@@ -65,6 +65,7 @@ let frames = {
     },
 
     show: function (frame) {
+        player = frame.people[0]
         if (is_hand_raised(player, 'left') && is_hand_raised(player, 'right')) {
             if (state == ""){
                 startIcebreakerIntro();
