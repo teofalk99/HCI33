@@ -88,7 +88,7 @@ let frames = {
 
             players.forEach((player, i) => {
                 if ( is_hand_raised(player, 'left') && is_hand_raised(player, 'right') ){
-                    do_countdown("./intro.html", "Aborting game...");
+                    do_countdown("./index.html", "Aborting game...");
                 }
                 else if (is_hand_raised(player, 'left')){
                     update_votes(i+1, 'left');
