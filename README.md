@@ -29,3 +29,5 @@ icebreaker page. I also wrote the logic for how we process gestures, execute cou
 Lastly, I spent a significant amount of time testing and debugging with Matthew in HLH17.
  
 Teo Falk - tef25: I improved the icebreaker portion of the application by adding a functionality that randomly selects two options from a randomly selected category (fruit/vegetables, animals, and types of food). Based on what option the users select, a team name is then created by concatenating a randomly selected adjective with the selected option. I also added storing the generated team name in the browser's storage, to then be used for leaderboard purposes once the users complete the game. Aside from the functionality of the icebreaker, I also made some minor aesthetic changes.
+
+Cindy Hernandez - cmh239 : I connected the intro sequence screens to work with the motion sensor as I only had the front-end before. I also removed some of the intro sequence, speficially finding a partner that "likes X" since I didn't make as much sense with our application anymore.
