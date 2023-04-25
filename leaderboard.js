@@ -119,7 +119,7 @@ let frames = {
 
             //just check right
             if (votes['p1_right'] == 1 && votes['p2_right'] == 1){
-                do_countdown("./intro.html", "Exiting game...");
+                do_countdown("./index.html", "Exiting game...");
             }
 
             else if (votes['p1_left'] == 1 && votes['p2_left'] == 1){
