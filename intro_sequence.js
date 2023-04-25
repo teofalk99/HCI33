@@ -29,7 +29,7 @@ function startIcebreakerIntro() {
     state = "icebreakerIntro";
 }
 function icebreakerIntro() {
-    document.getElementById("instruction").innerHTML = "Now let's break the ice.";
+    document.getElementById("instruction").innerHTML = "First, let's break the ice.";
     document.getElementById("instruction").style.fontSize = "100px";
 
     document.getElementById("gif").style.display = "none";
